@@ -4,24 +4,29 @@
     {
         private readonly AppDbContext _context;
 
-        public AssignmentRepository(AppDbContext context) => _context = context; 
+        public AssignmentRepository(AppDbContext context) => _context = context;
 
 
         public async Task Create(Assignment assignment)
         {
             await _context.Assignments.AddAsync(assignment);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task Update(Assignment assignment)
+        public void Update(Assignment assignment)
         {
-             _context.Assignments.Update(assignment);
+            _context.Assignments.Update(assignment);
+            _context.SaveChanges();
         }
 
         public async Task Delete(int id)
         {
-            var assignment = _context.Assignments.Attach(new Assignment { Id = id });
-            assignment.State = EntityState.Deleted;
-            await _context.SaveChangesAsync();
+            Assignment? assignment = await _context.Assignments.FirstOrDefaultAsync(x => x.Id == id);
+            if (assignment != null)
+            {
+                _context.Assignments.Remove(assignment);
+                _context.SaveChanges();
+            }
         }
 
         public async Task<List<Assignment>> GetAllAssignments()
@@ -29,7 +34,7 @@
             return await _context.Assignments.ToListAsync();
         }
 
-        public async Task<Assignment> GetAssignmentById(int id)
+        public async Task<Assignment?> GetAssignmentById(int id)
         {
             return await _context.Assignments.FirstOrDefaultAsync(a => a.Id == id);
         }

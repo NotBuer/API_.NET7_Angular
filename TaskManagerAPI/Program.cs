@@ -1,6 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
+
+builder.BuilderAddDbContext();
+
 var services = builder.Services;
-var configuration = builder.Configuration;
 
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
