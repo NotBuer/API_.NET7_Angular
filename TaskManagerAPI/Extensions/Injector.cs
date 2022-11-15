@@ -1,4 +1,4 @@
-﻿namespace TaskManagerAPI.IOC
+﻿namespace TaskManagerAPI.Extensions
 {
     public static class Injector
     {

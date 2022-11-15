@@ -3,7 +3,6 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 global using System.ComponentModel.DataAnnotations;
 
-global using TaskManagerAPI.IOC;
 global using TaskManagerAPI.Endpoints;
 global using TaskManagerAPI.Entities;
 global using TaskManagerAPI.Entities.Interfaces;
